@@ -1,3 +1,8 @@
+resource "azurerm_resource_group" "rg" {
+  location = var.location
+  name     = var.resource_group_name
+}
+
 resource "azurerm_kubernetes_cluster" "default" {
   name                = "First-aks"
   location            = azurerm_resource_group.default.location

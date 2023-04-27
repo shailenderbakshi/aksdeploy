@@ -25,7 +25,7 @@ jobs:
       backendAzureRmResourceGroupName: '$(sa-resource_group)'
       backendAzureRmStorageAccountName: '$(storage_accounts)'
       backendAzureRmContainerName: '$(blob_storage)'
-      backendAzureRmKey: '$(hub_state_file)'
+      backendAzureRmKey: '$(tfstate_file)'
   - task: TerraformTaskV2@2
     displayName: 'Terraform : Validate'
     inputs:

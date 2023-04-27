@@ -51,7 +51,7 @@ jobs:
       backendAzureRmResourceGroupName: '$(sa-resource_group)'
       backendAzureRmStorageAccountName: '$(storage_accounts)'
       backendAzureRmContainerName: '$(blob_storage)'
-      backendAzureRmKey: '$(hub_state_file)'
+      backendAzureRmKey: '$(tfstate_file)'
   - task: TerraformTaskV3@3
     displayName: 'Terraform : Plan'
     inputs:

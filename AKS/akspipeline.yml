@@ -46,7 +46,7 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'init'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/HubLZ/landingzone'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/cluster/landingzone'
       backendServiceArm: 'Shail-Subs(2fae94b1-7a9f-489c-bf7c-877563309b5c)'
       backendAzureRmResourceGroupName: '$(sa-resource_group)'
       backendAzureRmStorageAccountName: '$(storage_accounts)'
@@ -57,14 +57,14 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'plan'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/HubLZ/landingzone'
-      commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/HubLZ/terraform.tfvars'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/cluster/landingzone'
+      commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/cluster/terraform.tfvars'
       environmentServiceNameAzureRM: 'Shail-Subs(2fae94b1-7a9f-489c-bf7c-877563309b5c)'
   - task: TerraformTaskV3@3
     displayName: 'Terraform : Apply'
     inputs:
       provider: 'azurerm'
       command: 'apply'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/HubLZ/landingzone'
-      commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/HubLZ/terraform.tfvars'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/cluster/landingzone'
+      commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/cluster/terraform.tfvars'
       environmentServiceNameAzureRM: 'Shail-Subs(2fae94b1-7a9f-489c-bf7c-877563309b5c)'

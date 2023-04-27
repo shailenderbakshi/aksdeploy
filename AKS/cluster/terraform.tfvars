@@ -18,3 +18,5 @@ APIGatewaysubnet-fe-name = "gsuksagsub-fe"
 APIGatewaysubnet-be-name = "gsuksagsub-be"
 storageaccount_names = ["gsukshubbsa0001","gsukshubbsa0002","gsukshubbsa0003"]
 asw_name = "GSUKSHUBAG"
+appId    = "9c1aa845-dd6e-4e81-aac8-91b37caf6399"
+password = "1sI8Q~bDqjL1bZ4ZY3sWCRvSFMKJdrcOvbgficjt"

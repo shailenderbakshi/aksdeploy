@@ -17,7 +17,7 @@ variable "costcenter" {
 ########################################################################
 variable "resource_group_name" {
   type    = string
-  default = "LZ-CONNSUB-rg"
+  default = "AKS-RG"
 }
 
 variable "location" {

@@ -1,0 +1,82 @@
+trigger: none
+pool:
+  vmImage: "ubuntu-latest"
+
+#Global Variables
+variables:
+- group: AZLZ-Variables
+- name: tfvarname
+  value: '$(System.DefaultWorkingDirectory)/Peering/peering.tfvars'
+- name: tfstate_file
+  value: 'peering_tfstate.state'
+
+jobs:
+- job: Validate
+  displayName: Terraform Validate
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - checkout: self
+
+  - task: TerraformInstaller@0
+    inputs:
+      terraformVersion: 'latest'
+
+  - task: TerraformTaskV2@2
+    displayName: 'Terraform : Init'
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Peering'
+      backendServiceArm: 'Shail-Subs(2fae94b1-7a9f-489c-bf7c-877563309b5c)'
+      backendAzureRmResourceGroupName: '$(sa-resource_group)'
+      backendAzureRmStorageAccountName: '$(storage_accounts)'
+      backendAzureRmContainerName: '$(blob_storage)'
+      backendAzureRmKey: '$(tfstate_file)'
+
+  - task: TerraformTaskV2@2
+    displayName: 'Terraform : Validate'
+    inputs:
+      command: validate
+
+- job: Deploy
+  dependsOn:
+  - Validate
+  displayName: Terraform Deploy
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - checkout: self
+  - task: TerraformInstaller@0
+    displayName: Install Terraform latest
+
+  - task: TerraformTaskV2@2
+    displayName: 'Terraform : Init'
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Peering'
+      backendServiceArm: 'Shail-Subs(2fae94b1-7a9f-489c-bf7c-877563309b5c)'
+      backendAzureRmResourceGroupName: '$(sa-resource_group)'
+      backendAzureRmStorageAccountName: '$(storage_accounts)'
+      backendAzureRmContainerName: '$(blob_storage)'
+      backendAzureRmKey: '$(tfstate_file)'
+
+  - task: TerraformTaskV3@3
+    displayName: 'Terraform : Plan'
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Peering'
+      commandOptions: '-var-file=$(tfvarname) -var="Identity_Suscrption_ID=$(identity_subscription_id)" -var="Management_Suscrption_ID=$(Management_subscription_id)" -var="tenant_id=$(tenant-id)" -var="client_id=$(client-id)" -var="client_secret=$(secret)"'
+      environmentServiceNameAzureRM: 'Shail-Subs(2fae94b1-7a9f-489c-bf7c-877563309b5c)'
+
+  - task: TerraformTaskV3@3
+    displayName: 'Terraform : Apply'
+    inputs:
+      provider: 'azurerm'
+      command: 'apply'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Peering'
+      commandOptions: '-var-file=$(tfvarname) -var="Identity_Suscrption_ID=$(identity_subscription_id)" -var="Management_Suscrption_ID=$(Management_subscription_id)" -var="tenant_id=$(tenant-id)" -var="client_id=$(client-id)" -var="client_secret=$(secret)"'
+      environmentServiceNameAzureRM: 'Shail-Subs(2fae94b1-7a9f-489c-bf7c-877563309b5c)'
+

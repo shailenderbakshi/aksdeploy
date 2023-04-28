@@ -29,15 +29,15 @@ variable "aks_subnet_address_name" {
   description = "AKS Subnet Name"
 }
 
-variable "appgw_subnet_address_prefix" {
-  type        = string
-  description = "AppGW Subnet Address Prefix"
-}
+// variable "appgw_subnet_address_prefix" {
+//   type        = string
+//   description = "AppGW Subnet Address Prefix"
+// }
 
-variable "appgw_subnet_address_name" {
-  type        = string
-  description = "AppGW Subnet Name"
-}
+// variable "appgw_subnet_address_name" {
+//   type        = string
+//   description = "AppGW Subnet Name"
+// }
 
 variable "aks_name" {
   type        = string
@@ -49,10 +49,10 @@ variable "kubernetes_version" {
   description = "AKS K8s Version"
 }
 
-variable "agent_count" {
-  type        = string
-  description = "AKS Agent Count"
-}
+// variable "agent_count" {
+//   type        = string
+//   description = "AKS Agent Count"
+// }
 
 variable "vm_size" {
   type        = string

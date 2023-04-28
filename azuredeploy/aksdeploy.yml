@@ -58,7 +58,7 @@ jobs:
       provider: 'azurerm'
       command: 'plan'
       workingDirectory: '$(System.DefaultWorkingDirectory)/azuredeploy'
-      commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/azuredeployr/terraform.tfvars'
+      commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/azuredeploy/terraform.tfvars'
       environmentServiceNameAzureRM: 'Shail-Subs'
   - task: TerraformTaskV3@3
     displayName: 'Terraform : Apply'

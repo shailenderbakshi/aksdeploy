@@ -3,7 +3,7 @@ pool:
   vmImage: "ubuntu-latest"
 
 variables:
-- group: LandingZoneVars
+- group: AZLZ-Variables
 
 
 jobs:

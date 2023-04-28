@@ -3,7 +3,7 @@ pool:
   vmImage: "ubuntu-latest"
 
 variables:
-- group: AZLZ-Variables
+- group: LandingZoneVars
 
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'init'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/modules'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/azuredeploy'
       backendServiceArm: 'Shail-Subs'
       backendAzureRmResourceGroupName: '$(backendAzureRmResourceGroupName)'
       backendAzureRmStorageAccountName: '$(backendAzureRmStorageAccountName)'
@@ -33,7 +33,7 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'plan'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/modules'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/azuredeploy'
       environmentServiceNameAzureRM: 'Shail-Subs'
 
   - task: TerraformTaskV3@3
@@ -41,6 +41,6 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'apply'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/modules'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/azuredeploy'
       environmentServiceNameAzureRM: 'Shail-Subs'
 

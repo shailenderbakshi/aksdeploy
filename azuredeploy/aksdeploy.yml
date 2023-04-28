@@ -5,9 +5,35 @@ pool:
 variables:
 - group: AZLZ-Variables
 
-
 jobs:
+- job: Validate
+  displayName: Terraform Validate
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - checkout: self
+  
+  - task: TerraformInstaller@0
+    inputs:
+      terraformVersion: 'latest'
+  - task: TerraformTaskV2@2
+    displayName: 'Terraform : Init'
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      backendServiceArm: 'Shail-Subs'
+      backendAzureRmResourceGroupName: '$(sa-resource_group)'
+      backendAzureRmStorageAccountName: '$(storage_accounts)'
+      backendAzureRmContainerName: '$(blob_storage)'
+      backendAzureRmKey: '$(tfstate_file)'
+  - task: TerraformTaskV2@2
+    displayName: 'Terraform : Validate'
+    inputs:
+      command: validate
+
 - job: Deploy
+  dependsOn:
+  - Validate
   displayName: Terraform Deploy
   pool:
     vmImage: ubuntu-latest
@@ -15,7 +41,6 @@ jobs:
   - checkout: self
   - task: TerraformInstaller@0
     displayName: Install Terraform latest
-
   - task: TerraformTaskV2@2
     displayName: 'Terraform : Init'
     inputs:
@@ -23,24 +48,23 @@ jobs:
       command: 'init'
       workingDirectory: '$(System.DefaultWorkingDirectory)/azuredeploy'
       backendServiceArm: 'Shail-Subs'
-      backendAzureRmResourceGroupName: '$(backendAzureRmResourceGroupName)'
-      backendAzureRmStorageAccountName: '$(backendAzureRmStorageAccountName)'
-      backendAzureRmContainerName: '$(backendAzureRmContainerName)'
-      backendAzureRmKey: '$(backendAzureRmKey)'
-
+      backendAzureRmResourceGroupName: '$(sa-resource_group)'
+      backendAzureRmStorageAccountName: '$(storage_accounts)'
+      backendAzureRmContainerName: '$(blob_storage)'
+      backendAzureRmKey: '$(tfstate_file)'
   - task: TerraformTaskV3@3
     displayName: 'Terraform : Plan'
     inputs:
       provider: 'azurerm'
       command: 'plan'
       workingDirectory: '$(System.DefaultWorkingDirectory)/azuredeploy'
+      commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/azuredeployr/terraform.tfvars'
       environmentServiceNameAzureRM: 'Shail-Subs'
-
   - task: TerraformTaskV3@3
     displayName: 'Terraform : Apply'
     inputs:
       provider: 'azurerm'
       command: 'apply'
       workingDirectory: '$(System.DefaultWorkingDirectory)/azuredeploy'
+      commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/azuredeploy/terraform.tfvars'
       environmentServiceNameAzureRM: 'Shail-Subs'
-

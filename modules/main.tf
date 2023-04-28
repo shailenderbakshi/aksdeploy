@@ -1,5 +1,5 @@
 module "loganalytics" {
-  source                       = "./modules/loganalytics"
+  source                       = "/modules/loganalytics"
   log_analytics_workspace_name = var.log_analytics_workspace_name
   location                     = var.location
   log_analytics_workspace_sku  = "PerGB2018"
@@ -7,7 +7,7 @@ module "loganalytics" {
 }
 
 module "vnet_aks" {
-  source                      = "./modules/vnet"
+  source                      = "/modules/vnet"
   name                        = var.vnet_name
   location                    = var.location
   network_address_space       = var.network_address_space
@@ -19,7 +19,7 @@ module "vnet_aks" {
 }
 
 module "aks" {
-  source                     = "./modules/aks"
+  source                     = "/modules/aks"
   name                       = var.aks_name
   kubernetes_version         = var.kubernetes_version
   agent_count                = var.agent_count

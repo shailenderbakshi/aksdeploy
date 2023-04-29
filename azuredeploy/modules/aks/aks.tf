@@ -11,7 +11,6 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   location            = var.location
   resource_group_name = azurerm_resource_group.kubernetes_resource_group.name
   dns_prefix          = var.name
-  kubernetes_version  = var.kubernetes_version
 
   node_resource_group = "${var.name}-node-rg"
 

@@ -14,13 +14,13 @@ variable "vnet_name" {
 }
 
 variable "network_address_space" {
-  type        = string
+  type        = List
   description = "Virtual Network Address Space"
 }
 
 
 variable "aks_subnet_address_prefix" {
-  type        = string
+  type        = List
   description = "AKS Subnet Address Prefix"
 }
 
@@ -30,7 +30,7 @@ variable "aks_subnet_address_name" {
 }
 
 variable "appgw_subnet_address_prefix" {
-  type        = string
+  type        = List
   description = "AppGW Subnet Address Prefix"
 }
 

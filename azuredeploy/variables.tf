@@ -59,10 +59,10 @@ variable "vm_size" {
   description = "AKS VM Size"
 }
 
-variable "acr_name" {
-  type        = string
-  description = "ACR Name"
-}
+// variable "acr_name" {
+//   type        = string
+//   description = "ACR Name"
+// }
 
 variable "environment" {
   type        = string

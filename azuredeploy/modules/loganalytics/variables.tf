@@ -10,4 +10,5 @@ variable "location" {
 }
 
 variable "environment" {
+  default = "dev"
 }

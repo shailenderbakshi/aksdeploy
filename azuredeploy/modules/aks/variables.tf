@@ -1,4 +1,10 @@
-
+########################################################################
+# Resource Group Variables
+########################################################################
+variable "resource_group_name" {
+  type    = string
+  default = "AKS-RG01"
+}
 
 variable "name" {
 }

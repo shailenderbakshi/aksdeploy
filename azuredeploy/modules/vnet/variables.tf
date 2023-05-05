@@ -22,3 +22,9 @@ variable "appgw_subnet_address_name" {
 
 variable "environment" {
 }
+
+variable "resource_group_name" {
+  type        = string
+  description = "Prefix for the Resource Groups."
+  default = ""
+}

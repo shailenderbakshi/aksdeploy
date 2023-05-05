@@ -1,10 +1,10 @@
-resource "azurerm_resource_group" "rg" {
-  location = var.location
-  name     = var.resource_group_name
-  tags = {
-    Environment = var.environment
-  }
-}
+// resource "azurerm_resource_group" "rg" {
+//   location = var.location
+//   name     = var.resource_group_name
+//   tags = {
+//     Environment = var.environment
+//   }
+// }
 
 resource "azurerm_kubernetes_cluster" "k8s" {
   name                = var.name

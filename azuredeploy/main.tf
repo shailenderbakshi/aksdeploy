@@ -1,5 +1,13 @@
+module "resource_group"{
+    source                      = "./Modules/ResourceGroup"
+    resource_group_name         = var.resource_group_name
+    location                    = var.location
+
+}
+
 module "loganalytics" {
   source                       = "./modules/loganalytics"
+  resource_group_name          = module.resource_group.name
   log_analytics_workspace_name = var.log_analytics_workspace_name
   location                     = var.location
   log_analytics_workspace_sku  = "PerGB2018"
@@ -8,6 +16,7 @@ module "loganalytics" {
 
 module "vnet_aks" {
   source                      = "./modules/vnet"
+  resource_group_name         = module.resource_group.name
   name                        = var.vnet_name
   location                    = var.location
   network_address_space       = var.network_address_space
@@ -20,6 +29,7 @@ module "vnet_aks" {
 
 module "aks" {
   source                     = "./modules/aks"
+  resource_group_name        = module.resource_group.name
   name                       = var.aks_name
   kubernetes_version         = var.kubernetes_version
   agent_count                = var.agent_count

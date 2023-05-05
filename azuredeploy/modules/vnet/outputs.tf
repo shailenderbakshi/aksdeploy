@@ -18,6 +18,6 @@ output "vnet_name" {
 //   value = azurerm_resource_group.vnet_resource_group.name
 // }
 
-output "resource_group_id" {
-  value = azurerm_resource_group.vnet_resource_group.id
-}
+// output "resource_group_id" {
+//   value = azurerm_resource_group.vnet_resource_group.id
+// }

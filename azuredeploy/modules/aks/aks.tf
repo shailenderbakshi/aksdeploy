@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_kubernetes_cluster" "k8s" {
   name                = var.name
   location            = azurerm_resource_group.rg.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = var.name
 
   node_resource_group = var.resource_group_name
@@ -70,12 +70,12 @@ ingress_application_gateway {
   }
 }
 
-// data "azurerm_resource_group" "node_resource_group" {
-//   name = azurerm_kubernetes_cluster.k8s.node_resource_group
-//          depends_on = [
-//      azurerm_kubernetes_cluster.k8s
-//   ]
-// }
+data "azurerm_resource_group" "node_resource_group" {
+  name = azurerm_kubernetes_cluster.k8s.node_resource_group
+         depends_on = [
+     azurerm_kubernetes_cluster.k8s
+  ]
+}
 
 resource "azurerm_role_assignment" "node_infrastructure_update_scale_set" {
   principal_id         = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].object_id

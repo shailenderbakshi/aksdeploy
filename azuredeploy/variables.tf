@@ -73,3 +73,11 @@ variable "ssh_public_key" {
   type        = string
   description = "SSH key for AKS Cluster"
 }
+
+########################################################################
+# Resource Group Variables
+########################################################################
+variable "resource_group_name" {
+  type    = string
+  default = ""
+}

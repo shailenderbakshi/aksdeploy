@@ -16,7 +16,7 @@ module "loganalytics" {
 
 module "vnet_aks" {
   source                      = "./modules/vnet"
-  resource_group_name         = module.resource_group.name
+  // resource_group_name         = module.resource_group.name
   name                        = var.vnet_name
   location                    = var.location
   network_address_space       = var.network_address_space

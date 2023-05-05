@@ -28,3 +28,7 @@ variable "resource_group_name" {
   description = "Prefix for the Resource Groups."
   default = ""
 }
+variable "vnet_name" {
+  type        = string
+  description = "Virtual Network Name"
+}

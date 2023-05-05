@@ -1,3 +1,11 @@
+########################################################################
+# Resource Group Variables
+########################################################################
+variable "resource_group_name" {
+  type    = string
+  default = ""
+}
+
 variable log_analytics_workspace_name {
 }
 

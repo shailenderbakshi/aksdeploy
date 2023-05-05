@@ -12,7 +12,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = var.name
 
-  node_resource_group = var.resource_group_name
+  // node_resource_group = var.resource_group_name
 
   linux_profile {
     admin_username = "ubuntu"

@@ -54,6 +54,7 @@ ingress_application_gateway {
   network_profile {
     load_balancer_sku = "standard"
     network_plugin    = "azure"
+    service_cidr = "10.0.3.0/24"
   }
 
     role_based_access_control {

@@ -1,5 +1,5 @@
-variable "name" {
-}
+// variable "name" {
+// }
 
 variable "location" {
   default = "uksouth"

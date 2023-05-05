@@ -9,7 +9,7 @@ variable "rsg_Count" {
   default     = 1
 }
 
-variable "rsg_Name" {
+variable "resource_group_name" {
   type        = string
   description = "Prefix for the Resource Groups."
   default = ""

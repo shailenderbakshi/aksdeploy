@@ -62,7 +62,7 @@ variable azurepolicy {
 } 
 variable networkPlugin {
   type=string
-  default="kubenet"
+  default="azure"
 } 
 variable authorizedIPRanges {
   default=["94.193.15.192/32"]

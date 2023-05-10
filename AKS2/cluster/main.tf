@@ -47,3 +47,4 @@ resource "azurerm_resource_group_template_deployment" "aksc_deploy" {
     keyVaultCreate = {value=var.keyVaultCreate}
     keyVaultOfficerRolePrincipalId = {value=data.azurerm_client_config.current.object_id}
   })
+}

@@ -39,7 +39,7 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: "2fae94b1-7a9f-489c-bf7c-877563309b5c"
         ARM_TENANT_ID: "92df0fcf-acf6-4e0b-86ab-9fe4a46f8733"
-      working-directory: ./AKS2
+      working-directory: ./AKS2/cluster
       shell: bash
 
     # Checks that all Terraform configuration files adhere to a canonical format
@@ -56,7 +56,7 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: "2fae94b1-7a9f-489c-bf7c-877563309b5c"
         ARM_TENANT_ID: "92df0fcf-acf6-4e0b-86ab-9fe4a46f8733"
-      working-directory: ./AKS2 # Use your environment folder
+      working-directory: ./AKS2/cluster # Use your environment folder
       shell: bash
     
     - name: Terraform Apply
@@ -67,5 +67,5 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: "2fae94b1-7a9f-489c-bf7c-877563309b5c"
         ARM_TENANT_ID: "92df0fcf-acf6-4e0b-86ab-9fe4a46f8733"
-      working-directory: ./AKS2 # Use your environment folder
+      working-directory: ./AKS2/cluster # Use your environment folder
       shell: bash
